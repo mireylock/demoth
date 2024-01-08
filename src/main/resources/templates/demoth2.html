@@ -1,0 +1,34 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>DemoTH</title>
+  <style>
+    td {border: 1px solid black;}
+  </style>
+</head>
+<body>
+<table >
+  <!--se pone comentario para ocultar la etiqueta de html
+  Se puede hacer un each por cada row y no hace falta el th:block-->
+
+  <!--/*/ <th:block th:each="libro : ${libroList}"> /*/-->
+  <tr>
+    <td th:text="${libro.titulo}">Título</td>
+    <td th:text="${libro.autor}">Autor</td>
+  </tr>
+  <tr>
+    <td colspan="2" th:text="${libro.editorial}" style="background-color: red;color: yellow;">Editorial</td>
+  </tr>
+  <!--/*/ </th:block> /*/-->
+
+<!--
+  <h1>Sólo con tr</h1>
+  <tr th:each="libro" : ${libroList}>
+    <td th:text="${libro.titulo}">Título</td>
+    <td th:text="${libro.autor}">Autor</td>
+  </tr>
+-->
+</table>
+</body>
+</html>
