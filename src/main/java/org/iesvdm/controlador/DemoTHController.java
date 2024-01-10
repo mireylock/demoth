@@ -17,6 +17,7 @@ public class DemoTHController {
 	@GetMapping("/demoth1")
 	//model es como request.setAttribute, donde se meten los atributos para que estén disponibles en la vista
 	//es un objeto que ya da el framework
+	//su ámbito es sólo la petición
 	public String demoTH(Model model) {
 		
 		String textoParrafo2 = "Esto es el texto que irá dentro del párrafo...";
@@ -38,14 +39,15 @@ public class DemoTHController {
 		//si se scambia el nnombre da whitelabel error page porque no encuentra la plantilla
 	}
 
+
 	@GetMapping("/demoth2")
 	public String demoth2(Model model) {
 
 		List<Libro> libros = new ArrayList<>();
 
-		libros.add(new Libro("El Quijote", "Miguel Cervantes", "Anaya"));
-		libros.add(new Libro("Crimen y Castigo", "Fedor Dostoievski", "Santillana"));
-		libros.add(new Libro("Oliver Twist", "Charles Dickens", "Tusquests"));
+		libros.add(new Libro(1,"El Quijote", "Miguel Cervantes", "Anaya"));
+		libros.add(new Libro(2,"Crimen y Castigo", "Fedor Dostoievski", "Santillana"));
+		libros.add(new Libro(3,"Oliver Twist", "Charles Dickens", "Tusquests"));
 
 		model.addAttribute(libros); //Equivalente a model.addAttribute("libroList", books)
 		//en la plantilla se espera libroList y viene porque libros es una lista de libro
@@ -54,6 +56,7 @@ public class DemoTHController {
 		return "demoth2";
 	}
 
+	//Session entre distintas peticiones, pervive mientras la sesión esté activa
 	@GetMapping("/demoth3")
 	public String demoth3(Model model, HttpSession session) {
 
@@ -65,7 +68,7 @@ public class DemoTHController {
 
 		session.setAttribute("unaVariableDeSesion", variableSesion);
 
-		Libro libro = new Libro("El Quijote", "Miguel Cervantes", "Anaya");
+		Libro libro = new Libro(1,"El Quijote", "Miguel Cervantes", "Anaya");
 		session.setAttribute("ElQuijote", libro);
 
 		return "demoth3";
@@ -74,22 +77,44 @@ public class DemoTHController {
 	@GetMapping("/demoth4")
 	public String demoth4(Model model) {
 
-		Libro libro = new Libro("El Quijote", "Miguel Cervantes", "Anaya");
+		Libro libro = new Libro(1,"El Quijote", "Miguel Cervantes", "Anaya");
 
 		model.addAttribute("libro", libro);
 
 		return "demoth4";
 	}
 
+
 	@GetMapping("/demoth5")
 	public String demoth5(Model model) {
 
-		Libro libro = new Libro("El Quijote", "Miguel Cervantes", "Anaya");
+		Libro libro = new Libro(1,"El Quijote", "Miguel Cervantes", "Anaya");
 
 		model.addAttribute("libro", libro);
 
 		return "demoth5";
 	}
+
+
+	@GetMapping("/demoth6")
+	public String demoth6(Model model) {
+
+		Libro libro = new Libro(1, "El Quijote", "Miguel Cervantes", "Anaya");
+
+		model.addAttribute("libro", libro);
+
+		return "demoth6";
+	}
+
+	//No hace falta pasarle el model porque no queremos inyectar objetos que la template acceda a ellos
+	@GetMapping("/demoth7")
+	public String demoth7() {
+
+		return "demoth7";
+	}
+
+
+
 
 
 
