@@ -107,7 +107,7 @@ public class DemoTHController {
 	}
 
 	//No hace falta pasarle el model porque no queremos inyectar objetos que la template acceda a ellos
-	@GetMapping("/demoth7")
+	@GetMapping({"/demoth7", "/demoth7en"})//array con local en español e inglés
 	public String demoth7() {
 
 		return "demoth7";
